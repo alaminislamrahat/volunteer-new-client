@@ -1,86 +1,94 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom'; // For navigation
+import { Link } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
+import { FaUserAlt, FaSignOutAlt, FaPlus, FaClipboardList } from 'react-icons/fa'; // Icons for profile, logout, and add/manage posts
+import { useState } from 'react'; // To manage dropdown visibility
 
 const Navbar = () => {
-    // Dummy state for logged-in user (this can be replaced with your auth logic)
-    const [user, setUser] = useState({
-        loggedIn: true, // Toggle this value for testing
-        photoURL: "https://via.placeholder.com/50", // Replace with user's actual photo URL
-        displayName: "John Doe" // Replace with user's actual display name
-    });
+    const { user, logOut } = useAuth();
+    const [profileDropdownVisible, setProfileDropdownVisible] = useState(false); // State to toggle profile dropdown visibility
+    const [avatarDropdownVisible, setAvatarDropdownVisible] = useState(false); // State to toggle avatar dropdown visibility
 
     const navLinks = (
         <>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/volunteer-needs">All Volunteer Needs</Link></li>
+            <li><Link to="/all-volunteer-needs">All Volunteer Needs</Link></li>
+            {user && (
+                <li>
+                    {/* Profile link with dropdown toggle */}
+                    <button onClick={() => setProfileDropdownVisible(!profileDropdownVisible)} className="btn btn-ghost flex items-center gap-2">
+                        <FaUserAlt className="text-pink-600" /> My Profile
+                    </button>
+
+                    {/* Dropdown menu for "My Profile" */}
+                    {profileDropdownVisible && (
+                        <ul className="menu menu-compact dropdown-content bg-base-100 rounded-box z-[1] mt-10 w-52 p-2 shadow-lg absolute right-0">
+                            <li>
+                                <Link to="/add-volunteer-post" className="flex items-center gap-2">
+                                    <FaPlus className="text-pink-600" /> Add Volunteer Need Post
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/manage-my-posts" className="flex items-center gap-2">
+                                    <FaClipboardList className="text-pink-600" /> Manage My Posts
+                                </Link>
+                            </li>
+                        </ul>
+                    )}
+                </li>
+            )}
         </>
     );
 
     const handleLogout = () => {
-        // Add your logout logic here (e.g., clear user session, tokens, etc.)
-        setUser({ loggedIn: false });
+        logOut();
+        setAvatarDropdownVisible(false); // Close avatar dropdown on logout
     };
 
     return (
-        <div className="navbar bg-base-100">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16" />
-                        </svg>
-                    </div>
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        {navLinks}
-                        {user.loggedIn && (
-                            <li>
-                                <Link to="/profile">My Profile</Link>
-                            </li>
-                        )}
-                    </ul>
-                </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+        <div className="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+            {/* Website Name / Logo */}
+            <div className="navbar-start flex items-center">
+                <Link to="/" className="btn btn-ghost text-2xl font-semibold text-pink-600">Volunteer management</Link>
             </div>
+
+            {/* Navbar Center for Large Screens */}
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 flex items-center justify-center gap-3">
                     {navLinks}
-                    {user.loggedIn && (
-                        <li className="relative">
-                            <div className="dropdown dropdown-hover">
-                                <div className="avatar">
-                                    <div className="w-10 rounded-full">
-                                        <img src={user.photoURL} alt={user.displayName} />
-                                    </div>
-                                </div>
-                                <ul className="menu menu-compact dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                                    <li><Link to="/add-post">Add Volunteer Need Post</Link></li>
-                                    <li><Link to="/manage-posts">Manage My Posts</Link></li>
-                                    <li><button onClick={handleLogout}>Logout</button></li>
-                                </ul>
-                            </div>
-                        </li>
-                    )}
-                    {!user.loggedIn && (
-                        <li>
-                            <Link to="/login" className="btn btn-primary">Login</Link>
-                        </li>
-                    )}
                 </ul>
             </div>
-            <div className="navbar-end">
-                {!user.loggedIn && (
-                    <Link to="/login" className="btn">Login</Link>
+
+            {/* Navbar End - Profile and Login/Logout */}
+            <div className="navbar-end flex items-center">
+                {user && (
+                    <div className="relative">
+                        {/* Profile Avatar with dropdown toggle */}
+                        <button onClick={() => setAvatarDropdownVisible(!avatarDropdownVisible)} className="btn btn-ghost flex items-center gap-2">
+                            <div className="avatar w-10 h-10 rounded-full overflow-hidden">
+                                <img src={user.photoURL} alt={user.displayName} />
+                            </div>
+                        </button>
+
+                        {/* Avatar Dropdown Menu */}
+                        {avatarDropdownVisible && (
+                            <ul className="menu menu-compact dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow-lg absolute right-0">
+                                <li className="flex items-center gap-2">
+                                    <FaUserAlt className="text-pink-600" />
+                                    <span>{user.displayName}</span> {/* Display the user's name */}
+                                </li>
+                                <li>
+                                    <button onClick={handleLogout} className="flex items-center gap-2 text-red-500">
+                                        <FaSignOutAlt /> Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        )}
+                    </div>
+                )}
+
+                {/* Show Login button if user is not logged in */}
+                {!user && (
+                    <Link to="/login" className="btn btn-primary">Login</Link>
                 )}
             </div>
         </div>

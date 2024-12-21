@@ -1,9 +1,10 @@
+import Caurosel from "../Caurosel/Caurosel";
 
 
 const Home = () => {
     return (
         <div>
-            this is home
+            <Caurosel/>
         </div>
     );
 };
