@@ -23,7 +23,7 @@ const AddVolunteerPost = () => {
       description: form.description.value,
       category: form.category.value,
       location: form.location.value,
-      volunteersNeeded: form.volunteersNeeded.value,
+      volunteersNeeded:parseInt( form.volunteersNeeded.value),
       deadline: deadline.toISOString().split("T")[0],  // Use state value for deadline
       organizerName: form.organizerName.value,
       organizerEmail: form.organizerEmail.value

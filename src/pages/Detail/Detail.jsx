@@ -38,6 +38,15 @@ const Detail = () => {
             suggestion: e.target.suggestion.value,
             status: "requested", // Default status set to "requested"
             postId: _id,
+            category,
+            deadline,
+            description,
+            location,
+            organizerEmail,
+            organizerName,
+            postTitle,
+            thumbnail,
+           
         };
         console.log(volunteerData)
 
