@@ -2,21 +2,23 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Card from "../../../Components/Card/Card";
 import SectionTitle from "../../../Components/SectionTItle/SectionTitle";
+import useVolunteerData from "../../../Hooks/useVolunteerData";
 
 
 const HomeCardContainer = () => {
-    const axiosSecure = useAxiosSecure();
+    // const axiosSecure = useAxiosSecure();
 
-    const { data } = useQuery({
-        queryKey: ['volunteer'],
-        queryFn: async () => {
-            const { data } = await axiosSecure.get('/volunteer')
-            // console.log(data)
-            return data;
+    // const { data } = useQuery({
+    //     queryKey: ['volunteer'],
+    //     queryFn: async () => {
+    //         const { data } = await axiosSecure.get('/volunteer')
+    //         // console.log(data)
+    //         return data;
 
-        }
-    })
+    //     }
+    // })
     // console.log(data)
+    const {data} = useVolunteerData()
     return (
         <div className="my-24">
             <SectionTitle title={"volunteer need"} subTitle={"volunteer"}/>

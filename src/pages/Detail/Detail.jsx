@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const Detail = () => {
     const data = useLoaderData();
+    const axiosSecure = useAxiosSecure()
     const { user } = useAuth(); // Assuming user info is stored in context
     const navigate = useNavigate();
+    
 
     const {
         category,
@@ -50,21 +54,19 @@ const Detail = () => {
         };
         console.log(volunteerData)
 
-        // Send the volunteer request to the backend
-        // const response = await fetch("/api/volunteer-request", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(volunteerData),
-        // });
+      
+      try{
+        const {data} = await axiosSecure.post('/beVolunteer',volunteerData)
+        console.log(data);
+        toast.success('successfully added')
+        navigate('/')
+      }
+      catch(err){
+        console.log(err);
+        toast.error(err.message)
+      }
 
-        // if (response.ok) {
-        //     // Close the modal and navigate to a success page
-        //      // Navigate to success page or show success message
-        // } else {
-        //     alert("Failed to submit your volunteer request.");
-        // }
+      
     };
 
     return (

@@ -7,8 +7,11 @@ const Card = ({ item }) => {
         category,
         postTitle,
         deadline,
-        _id
+        _id,
+        volunteersNeeded
+
     } = item || {};
+    console.log(item)
 
     return (
         <div className="card w-96 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
@@ -21,6 +24,7 @@ const Card = ({ item }) => {
             <div className="card-body p-6">
                 <h2 className="text-3xl font-semibold text-gray-900 mb-2 hover:text-indigo-600 transition-colors duration-200">{postTitle}</h2>
                 <p className="text-sm text-gray-600 mb-4">{`Deadline: ${new Date(deadline).toLocaleDateString()}`}</p>
+                <p className="text-sm text-gray-600 mb-4">Need of volunteer : {volunteersNeeded}</p>
                 <div className="card-actions justify-end mt-4">
                     <Link to={`/volunteerDetail/${_id}`}>
 
