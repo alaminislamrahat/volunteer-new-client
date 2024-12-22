@@ -19,7 +19,7 @@ const AddVolunteerPost = () => {
 
     const formData = {
       thumbnail: form.thumbnail.value,
-      postTitle: form.postTitle.value,
+      postTitle: form.title.value,
       description: form.description.value,
       category: form.category.value,
       location: form.location.value,
@@ -71,7 +71,7 @@ const AddVolunteerPost = () => {
           <input
             type="text"
             id="postTitle"
-            name="postTitle"
+            name="title"
             required
             className="input input-bordered w-full"
           />
