@@ -1,13 +1,15 @@
 import React from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";  // For DatePicker styles
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 // Remove the CSS import line if you're not using custom styles
 // import './AddVolunteerPost.css'; 
 
 const AddVolunteerPost = () => {
+  const axiosSecure = useAxiosSecure()
 
   // Form submission handler
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -26,6 +28,10 @@ const AddVolunteerPost = () => {
 
     // Log form data to console (for now, can replace with API call later)
     console.log(formData);
+
+    const {data} = await axiosSecure.post('/volunteer',formData)
+    console.log(data)
+
   };
 
   return (
