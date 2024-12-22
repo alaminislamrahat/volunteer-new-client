@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";  // For DatePicker styles
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
-// Remove the CSS import line if you're not using custom styles
-// import './AddVolunteerPost.css'; 
+import toast from 'react-hot-toast';
+import useAuth from "../../Hooks/useAuth";
 
 const AddVolunteerPost = () => {
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+
+  // Step 1: Add a state for the date
+  const [deadline, setDeadline] = useState(new Date());
 
   // Form submission handler
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
 
-    // Access form values using form.name.value
     const formData = {
       thumbnail: form.thumbnail.value,
       postTitle: form.postTitle.value,
@@ -21,7 +24,7 @@ const AddVolunteerPost = () => {
       category: form.category.value,
       location: form.location.value,
       volunteersNeeded: form.volunteersNeeded.value,
-      deadline: form.deadline.value,
+      deadline: deadline.toISOString().split("T")[0],  // Use state value for deadline
       organizerName: form.organizerName.value,
       organizerEmail: form.organizerEmail.value
     };
@@ -29,9 +32,16 @@ const AddVolunteerPost = () => {
     // Log form data to console (for now, can replace with API call later)
     console.log(formData);
 
-    const {data} = await axiosSecure.post('/volunteer',formData)
-    console.log(data)
-
+    try {
+      const { data } = await axiosSecure.post('/volunteer', formData);
+      console.log(data);
+      if (data.insertedId) {
+        toast.success('Data added successfully');
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
   };
 
   return (
@@ -136,8 +146,8 @@ const AddVolunteerPost = () => {
           <DatePicker
             id="deadline"
             name="deadline"
-            selected={new Date()}
-            onChange={(date) => document.getElementById("deadline").value = date.toISOString().split("T")[0]} 
+            selected={deadline}
+            onChange={setDeadline}  // Update the state on date change
             dateFormat="yyyy-MM-dd"
             minDate={new Date()}
             className="input input-bordered w-full"
@@ -153,7 +163,7 @@ const AddVolunteerPost = () => {
             type="text"
             id="organizerName"
             name="organizerName"
-            value="John Doe" // Assuming the logged-in user's name
+            value={user?.displayName}
             readOnly
             className="input input-bordered w-full"
           />
@@ -167,7 +177,7 @@ const AddVolunteerPost = () => {
             type="email"
             id="organizerEmail"
             name="organizerEmail"
-            value="johndoe@example.com" // Assuming the logged-in user's email
+            value={user?.email}
             readOnly
             className="input input-bordered w-full"
           />
