@@ -11,7 +11,7 @@ const Card = ({ item }) => {
         volunteersNeeded
 
     } = item || {};
-    console.log(item)
+    // console.log(item)
 
     return (
         <div className="card w-96 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">

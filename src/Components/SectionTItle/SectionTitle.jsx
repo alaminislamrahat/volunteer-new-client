@@ -5,7 +5,7 @@ const SectionTitle = ({ title, subTitle }) => {
         <div className="text-center my-16">
             <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-500 mb-4 relative inline-block">
                 {/* Glowing neon text */}
-                <span className="text-shadow-neon"> [ {title} ]</span>
+                <span className="text-shadow-neon uppercase"> [ {title} ]</span>
                 
                 {/* Glowing underline animation */}
                 <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-purple-400 to-pink-500 transform scale-x-0 origin-left transition-all duration-500 ease-out group-hover:scale-x-100"></span>

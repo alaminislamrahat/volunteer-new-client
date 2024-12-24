@@ -7,6 +7,8 @@ import AllVolunteerNeeds from "../pages/AllVolunteerNeeds/AllVolunteerNeeds";
 import AddVolunteerPost from "../pages/AddVolunteerPost/AddVolunteerPost";
 import ManageMyPost from "../pages/ManageMyPost/ManageMyPost";
 import Detail from "../pages/Detail/Detail";
+import PrivateRoute from "./PrivateRoute";
+import UpdatePage from "../pages/UPdatePage/UpdatePage";
 
 export const router = createBrowserRouter([
     {
@@ -31,15 +33,20 @@ export const router = createBrowserRouter([
         },
         {
             path : '/manage-my-posts',
-            element : <ManageMyPost/>
+            element : <PrivateRoute><ManageMyPost/></PrivateRoute>
         },
         {
             path : '/add-volunteer-post',
-            element : <AddVolunteerPost/>
+            element : <PrivateRoute><AddVolunteerPost/></PrivateRoute>
         },
         {
             path : '/volunteerDetail/:id',
-            element : <Detail/>,
+            element : <PrivateRoute><Detail/></PrivateRoute>,
+            loader : ({params})=> fetch(`http://localhost:5000/volunteer/${params.id}`)
+        },
+        {
+            path : '/upade/:id',
+            element : <PrivateRoute><UpdatePage/></PrivateRoute>,
             loader : ({params})=> fetch(`http://localhost:5000/volunteer/${params.id}`)
         },
       ]

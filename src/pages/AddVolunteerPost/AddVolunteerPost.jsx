@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";  // For DatePicker styles
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import useAuth from "../../Hooks/useAuth";
+import SectionTitle from '../../Components/SectionTItle/SectionTitle';
 
 const AddVolunteerPost = () => {
   const axiosSecure = useAxiosSecure();
@@ -46,7 +47,7 @@ const AddVolunteerPost = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-3xl font-semibold text-center mb-6">Add Volunteer Need Post</h2>
+      <SectionTitle title={"Add Volunteer Need Post"} subTitle={"add data"}/>
       <form onSubmit={handleSubmit} className="space-y-4">
 
         {/* Thumbnail */}
