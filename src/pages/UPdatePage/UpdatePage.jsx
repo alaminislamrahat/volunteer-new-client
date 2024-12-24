@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import SectionTitle from "../../Components/SectionTItle/SectionTitle";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -6,47 +6,47 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import DatePicker from "react-datepicker";
 
-
 const UpdatePage = () => {
     const data = useLoaderData();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-  
+    const navigate = useNavigate()
+
     // Step 1: Add a state for the date
-    const [deadline, setDeadline] = useState(new Date());
-    const {category,description,location,organizerEmail,organizerName,postTitle,thumbnail,volunteersNeeded,_id} = data;
+    const [deadline, setDeadline] = useState(new Date(data.deadline)); // Default to existing deadline from data
+    const { category, description, location, organizerEmail, organizerName, postTitle, thumbnail, volunteersNeeded, _id } = data;
+
     // Form submission handler
     const handleSubmit = async (e) => {
-      e.preventDefault();
-      const form = e.target;
-  
-      const formData = {
-        thumbnail: form.thumbnail.value,
-        postTitle: form.title.value,
-        description: form.description.value,
-        category: form.category.value,
-        location: form.location.value,
-        volunteersNeeded:parseInt( form.volunteersNeeded.value),
-        deadline: deadline.toISOString().split("T")[0],  // Use state value for deadline
-        organizerName: form.organizerName.value,
-        organizerEmail: form.organizerEmail.value
-      };
-  
-      // Log form data to console (for now, can replace with API call later)
-      console.log(formData);
-  
-      try {
-        const { data } = await axiosSecure.post(`/update/${_id}`, formData);
-        console.log(data);
-        if (data.insertedId) {
-          toast.success('Data added successfully');
+        e.preventDefault();
+        const form = e.target;
+
+        const formData = {
+            thumbnail: form.thumbnail.value,
+            postTitle: form.title.value,
+            description: form.description.value,
+            category: form.category.value,
+            location: form.location.value,
+            volunteersNeeded: parseInt(form.volunteersNeeded.value),
+            deadline: deadline.toISOString().split("T")[0],  // Use state value for deadline
+            organizerName: form.organizerName.value,
+            organizerEmail: form.organizerEmail.value
+        };
+
+        // Log form data to console (for now, can replace with API call later)
+        console.log(formData);
+
+        try {
+            const { data } = await axiosSecure.put(`/update/${_id}`, formData);
+            console.log(data);
+            toast.success('Data Update successfully');
+            navigate('/manage-my-posts')
+        } catch (err) {
+            console.log(err);
+            toast.error(err.message);
         }
-      } catch (err) {
-        console.log(err);
-        toast.error(err.message);
-      }
     };
-    console.log(data, 'update page')
+
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
             <SectionTitle title={"Update Volunteer Data"} subTitle={"update data"} />
@@ -58,9 +58,9 @@ const UpdatePage = () => {
                         <span className="label-text">Thumbnail</span>
                     </label>
                     <input
-                    defaultValue={thumbnail}
+                        defaultValue={thumbnail} // Set default value
                         type="text"
-                        id="postTitle"
+                        id="thumbnail"
                         name="thumbnail"
                         required
                         className="input input-bordered w-full"
@@ -73,6 +73,7 @@ const UpdatePage = () => {
                         <span className="label-text">Post Title</span>
                     </label>
                     <input
+                        defaultValue={postTitle} // Set default value
                         type="text"
                         id="postTitle"
                         name="title"
@@ -87,6 +88,7 @@ const UpdatePage = () => {
                         <span className="label-text">Description</span>
                     </label>
                     <textarea
+                        defaultValue={description} // Set default value
                         id="description"
                         name="description"
                         required
@@ -101,6 +103,7 @@ const UpdatePage = () => {
                         <span className="label-text">Category</span>
                     </label>
                     <select
+                        defaultValue={category} // Set default value
                         id="category"
                         name="category"
                         required
@@ -120,6 +123,7 @@ const UpdatePage = () => {
                         <span className="label-text">Location</span>
                     </label>
                     <input
+                        defaultValue={location} // Set default value
                         type="text"
                         id="location"
                         name="location"
@@ -134,6 +138,7 @@ const UpdatePage = () => {
                         <span className="label-text">No. of Volunteers Needed</span>
                     </label>
                     <input
+                        defaultValue={volunteersNeeded} // Set default value
                         type="number"
                         id="volunteersNeeded"
                         name="volunteersNeeded"
@@ -148,9 +153,7 @@ const UpdatePage = () => {
                         <span className="label-text">Deadline</span>
                     </label>
                     <DatePicker
-                        id="deadline"
-                        name="deadline"
-                        selected={deadline}
+                        selected={deadline} // Default value from state
                         onChange={setDeadline}  // Update the state on date change
                         dateFormat="yyyy-MM-dd"
                         minDate={new Date()}
@@ -164,6 +167,7 @@ const UpdatePage = () => {
                         <span className="label-text">Organizer Name</span>
                     </label>
                     <input
+                        defaultValue={organizerName} // Set default value
                         type="text"
                         id="organizerName"
                         name="organizerName"
@@ -178,6 +182,7 @@ const UpdatePage = () => {
                         <span className="label-text">Organizer Email</span>
                     </label>
                     <input
+                        defaultValue={organizerEmail} // Set default value
                         type="email"
                         id="organizerEmail"
                         name="organizerEmail"
@@ -193,7 +198,7 @@ const UpdatePage = () => {
                         type="submit"
                         className="btn btn-primary w-full"
                     >
-                        Add Post
+                        Update Post
                     </button>
                 </div>
 
