@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
@@ -30,6 +30,11 @@ const Detail = () => {
     // Open and close modal handlers
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
+
+    // toast for 0 volunteersNeeded 
+    const handleToast =()=>{
+        toast.error("can't apply for be a volunteer .")
+    }
 
     // Handle form submission from the modal
     const handleSubmit = async (e) => {
@@ -103,9 +108,15 @@ const Detail = () => {
 
             <div className="mt-6">
                 {/* Button to open the modal */}
-                <button onClick={openModal} className="btn btn-primary">
-                    Be a Volunteer
-                </button>
+              {
+                volunteersNeeded == 0 ? <button 
+                onClick={handleToast}
+                className="btn btn-primary">Be a Volunteer</button> :   <button
+                
+                onClick={openModal} className="btn btn-primary">
+                   Be a Volunteer
+               </button>
+              }
             </div>
 
             {/* Modal Component */}

@@ -2,10 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import SectionTitle from "../../Components/SectionTItle/SectionTitle";
-// / Icon to represent applying
 
 import { FcCancel } from "react-icons/fc";
-import toast from "react-hot-toast";
+
 import Swal from "sweetalert2";
 
 const MyApply = () => {
@@ -38,7 +37,7 @@ const MyApply = () => {
                     const { data } = await axiosSecure.delete(`/deleteApply/${id}`);
                     console.log(data);
                     Swal.fire({
-                        title: "Deleted!",
+                        title: "Canceled!",
                         text: "Your application canceld.",
                         icon: "success"
                       });
