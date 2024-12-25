@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import useAuth from "../../Hooks/useAuth";
+
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
 
 const Detail = () => {
     const data = useLoaderData();
@@ -79,7 +80,7 @@ const Detail = () => {
     };
 
     return (
-        <div className={`max-w-4xl mx-auto p-6 ${isDarkMode && 'bg-gray-900 text-white'} bg-white shadow-lg rounded-lg`}>
+        <div className={`max-w-4xl mx-auto p-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white'} shadow-lg rounded-lg`}>
             <h2 className="text-4xl font-bold  mb-4">{postTitle}</h2>
             <img
                 src={thumbnail}

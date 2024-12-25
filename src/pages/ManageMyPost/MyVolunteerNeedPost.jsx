@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 
 const MyVolunteerNeedPost = () => {
-    const { user } = useAuth();
+    const { user,isDarkMode } = useAuth();
     // const [myPost, setMyPost] = useState([]);
     const axiosSecure = useAxiosSecure();
 
@@ -70,7 +70,7 @@ const MyVolunteerNeedPost = () => {
         <div className="p-6">
             <SectionTitle title={"My Volunteer Need Posts"} subTitle={"My Posted"} />
 
-            <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
+            <div className={`overflow-x-auto ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white'} shadow-lg rounded-lg`}>
                 <table className="table-auto w-full text-left text-gray-600">
                     {/* Table head */}
                     <thead className="bg-indigo-500 text-white">

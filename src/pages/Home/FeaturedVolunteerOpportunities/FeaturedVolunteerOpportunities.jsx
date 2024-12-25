@@ -7,7 +7,7 @@ const JoinTheMovement = () => {
         isDarkMode
     } = useAuth();
     return (
-        <div className={`${isDarkMode && 'from-purple-950 to-fuchsia-700'} relative bg-gradient-to-r from-teal-400 to-blue-500 text-white py-20`}>
+        <div className={`${isDarkMode ?'  bg-gradient-to-r from-purple-950 to-fuchsia-700' : 'bg-gradient-to-r from-teal-400 to-blue-500' } relative  text-white py-20`}>
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://example.com/volunteer-background.jpg')" }}></div>
             <div className="relative z-10 container mx-auto text-center px-4">
                 <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-shadow-md">

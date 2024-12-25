@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const MyApply = () => {
     const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
+    const { user,isDarkMode } = useAuth();
 
     // Fetching volunteer request data for the user
     const { data: myApply = [] ,refetch} = useQuery({
@@ -65,7 +65,7 @@ const MyApply = () => {
         <div className="p-6">
             <SectionTitle title={"My Volunteer Request Posts"} subTitle={"My Requests"} />
 
-            <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
+            <div className={`overflow-x-auto ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white'} shadow-lg rounded-lg`}>
                 <table className="table-auto w-full text-left text-gray-600">
                     {/* Table head */}
                     <thead className="bg-green-500 text-white">

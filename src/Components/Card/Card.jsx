@@ -12,7 +12,7 @@ const Card = ({ item }) => {
         volunteersNeeded
     } = item || {};
 
-    const { setDarkMode, isDarkMode, toggleDarkMode } = useAuth();
+    const {  isDarkMode } = useAuth();
 
     return (
         <div
