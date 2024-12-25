@@ -1,85 +1,67 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { app } from "../Firebase/firebase.config";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-
-// import { GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
-// const provider = new GoogleAuthProvider();
-
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const axiosSecure = useAxiosSecure();
+    
 
     const createUser = (email, password) => {
-        setLoading(true)
-        return createUserWithEmailAndPassword(auth, email, password)
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password);
+    };
 
-    }
-
-
-    // sign in 
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
-    }
+    };
 
-
-    const logOut = () => {
-        setLoading(true)
-        return signOut(auth);
-    }
-
+    const logOut = async () => {
+        setLoading(true);
+        await signOut(auth);
+        // Clear JWT token on logout
+        await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
+        setUser(null);
+        setLoading(false);
+    };
 
     const updateUserProfile = (name, photo) => {
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photo
-        })
-    }
-
-
-
-
-
+        });
+    };
 
     useEffect(() => {
-        const unsubsribe = onAuthStateChanged(auth, currentUser => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            setLoading(true);  // Always set loading to true until we know the user state
 
-            // setUser(currentUser);
-            // setLoading(false);
-            // console.log(currentUser);
-
-            // const userEmail = currentUser.email || user.email;
-            // const loggedUser = {email : userEmail}
-
-            if(currentUser){
-                const {data} = axiosSecure.post('/jwt',{email : currentUser.email});
-                console.log(data)
-                setUser(currentUser)
+            if (currentUser) {
+                try {
+                    const { data } = await axios.post('http://localhost:5000/jwt', { email: currentUser.email }, { withCredentials: true });
+                    console.log(data); // JWT received
+                    // Set the user along with the JWT token in your state or store
+                    setUser({ ...currentUser, token: data.token }); // Store JWT token
+                } catch (error) {
+                    console.error('Error fetching JWT:', error);
+                    setUser(null); // Handle the error, reset user state
+                }
+            } else {
+                // If no user, logout the user on the server side
+                await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
+                setUser(null); // Ensure the user state is reset
             }
+            setLoading(false); // Set loading to false after process completion
+        });
 
-            else{
-                const {data} = axiosSecure.post('/logout')
-                .then(()=>{
-                    console.log('logout successfull')
-                })
-                .catch(err => console.log(err,'login faild'))
-
-                console.log(data)
-                setUser(currentUser)
-            }
-            setLoading(false)
-
-        })
-
-        return () => {
-            return unsubsribe();
-        }
-    }, [])
+        // Cleanup function to unsubscribe from the auth state change listener
+        return () => unsubscribe();
+    }, []);
 
     const info = {
         user,
@@ -87,8 +69,8 @@ const AuthProvider = ({ children }) => {
         createUser,
         signIn,
         updateUserProfile,
-        logOut
-    }
+        logOut,
+    };
 
     return (
         <AuthContext.Provider value={info}>
