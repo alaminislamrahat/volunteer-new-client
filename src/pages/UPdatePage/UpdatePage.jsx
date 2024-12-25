@@ -9,7 +9,11 @@ import DatePicker from "react-datepicker";
 const UpdatePage = () => {
     const data = useLoaderData();
     const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
+ 
+    const {user,
+        setDarkMode,
+        isDarkMode,
+        toggleDarkMode} = useAuth();
     const navigate = useNavigate()
 
     // Step 1: Add a state for the date
@@ -46,16 +50,16 @@ const UpdatePage = () => {
             toast.error(err.message);
         }
     };
-
+   
     return (
-        <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+        <div className={`max-w-4xl mx-auto p-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white '} rounded-lg shadow-lg`}>
             <SectionTitle title={"Update Volunteer Data"} subTitle={"update data"} />
             <form onSubmit={handleSubmit} className="space-y-4">
 
                 {/* Thumbnail */}
                 <div className="form-control">
                     <label htmlFor="thumbnail" className="label">
-                        <span className="label-text">Thumbnail</span>
+                        <span  className={`label-text ${isDarkMode && 'text-white'}`}>Thumbnail</span>
                     </label>
                     <input
                         defaultValue={thumbnail} // Set default value
@@ -70,7 +74,7 @@ const UpdatePage = () => {
                 {/* Post Title */}
                 <div className="form-control">
                     <label htmlFor="postTitle" className="label">
-                        <span className="label-text">Post Title</span>
+                        <span  className={`label-text ${isDarkMode && 'text-white'}`}>Post Title</span>
                     </label>
                     <input
                         defaultValue={postTitle} // Set default value
@@ -85,7 +89,7 @@ const UpdatePage = () => {
                 {/* Description */}
                 <div className="form-control">
                     <label htmlFor="description" className="label">
-                        <span className="label-text">Description</span>
+                        <span  className={`label-text ${isDarkMode && 'text-white'}`}>Description</span>
                     </label>
                     <textarea
                         defaultValue={description} // Set default value
@@ -100,7 +104,7 @@ const UpdatePage = () => {
                 {/* Category */}
                 <div className="form-control">
                     <label htmlFor="category" className="label">
-                        <span className="label-text">Category</span>
+                        <span  className={`label-text ${isDarkMode && 'text-white'}`}>Category</span>
                     </label>
                     <select
                         defaultValue={category} // Set default value
@@ -120,7 +124,7 @@ const UpdatePage = () => {
                 {/* Location */}
                 <div className="form-control">
                     <label htmlFor="location" className="label">
-                        <span className="label-text">Location</span>
+                        <span  className={`label-text ${isDarkMode && 'text-white'}`}>Location</span>
                     </label>
                     <input
                         defaultValue={location} // Set default value
@@ -135,7 +139,7 @@ const UpdatePage = () => {
                 {/* Volunteers Needed */}
                 <div className="form-control">
                     <label htmlFor="volunteersNeeded" className="label">
-                        <span className="label-text">No. of Volunteers Needed</span>
+                        <span  className={`label-text ${isDarkMode && 'text-white'}`}>No. of Volunteers Needed</span>
                     </label>
                     <input
                         defaultValue={volunteersNeeded} // Set default value
@@ -150,7 +154,7 @@ const UpdatePage = () => {
                 {/* Deadline */}
                 <div className="form-control">
                     <label htmlFor="deadline" className="label">
-                        <span className="label-text">Deadline</span>
+                        <span  className={`label-text ${isDarkMode && 'text-white'}`}>Deadline</span>
                     </label>
                     <DatePicker
                         selected={deadline} // Default value from state
@@ -164,7 +168,7 @@ const UpdatePage = () => {
                 {/* Organizer Name and Email (read-only) */}
                 <div className="form-control">
                     <label htmlFor="organizerName" className="label">
-                        <span className="label-text">Organizer Name</span>
+                        <span  className={`label-text ${isDarkMode && 'text-white'}`}>Organizer Name</span>
                     </label>
                     <input
                         defaultValue={organizerName} // Set default value
@@ -179,7 +183,7 @@ const UpdatePage = () => {
 
                 <div className="form-control">
                     <label htmlFor="organizerEmail" className="label">
-                        <span className="label-text">Organizer Email</span>
+                        <span  className={`label-text ${isDarkMode && 'text-white'}`}>Organizer Email</span>
                     </label>
                     <input
                         defaultValue={organizerEmail} // Set default value

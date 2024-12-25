@@ -2,9 +2,16 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import { FaUserAlt, FaSignOutAlt, FaPlus, FaClipboardList } from 'react-icons/fa'; // Icons for profile, logout, and add/manage posts
 import { useState } from 'react'; // To manage dropdown visibility
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 const Navbar = () => {
-    const { user, logOut } = useAuth();
+    const { user,
+        logOut,
+        setDarkMode,
+        isDarkMode,
+        toggleDarkMode } = useAuth();
+
+
     const [profileDropdownVisible, setProfileDropdownVisible] = useState(false); // State to toggle profile dropdown visibility
     const [avatarDropdownVisible, setAvatarDropdownVisible] = useState(false); // State to toggle avatar dropdown visibility
 
@@ -45,7 +52,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+        <div className={`navbar ${isDarkMode ? 'bg-black text-white' : 'bg-base-100 shadow-lg ' } sticky top-0 z-50`}>
             {/* Website Name / Logo */}
             <div className="navbar-start flex items-center">
                 <Link to="/" className="btn btn-ghost text-2xl font-semibold text-pink-600">Volunteer management</Link>
@@ -56,6 +63,15 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal px-1 flex items-center justify-center gap-3">
                     {navLinks}
                 </ul>
+            </div>
+
+            <div className="toggle-switch-container">
+                <DarkModeSwitch
+                    style={{ marginBottom: "1rem", color: 'black' }}
+                    checked={isDarkMode}
+                    onChange={toggleDarkMode}
+                    size={60}
+                />
             </div>
 
             {/* Navbar End - Profile and Login/Logout */}

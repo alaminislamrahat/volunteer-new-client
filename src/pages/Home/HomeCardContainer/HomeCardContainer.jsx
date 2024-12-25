@@ -4,24 +4,18 @@ import Card from "../../../Components/Card/Card";
 import SectionTitle from "../../../Components/SectionTItle/SectionTitle";
 import useVolunteerData from "../../../Hooks/useVolunteerData";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
 
 const HomeCardContainer = () => {
-    // const axiosSecure = useAxiosSecure();
+  
+    const {setDarkMode,
+        isDarkMode,
+        toggleDarkMode} = useAuth();
 
-    // const { data } = useQuery({
-    //     queryKey: ['volunteer'],
-    //     queryFn: async () => {
-    //         const { data } = await axiosSecure.get('/volunteer')
-    //         // console.log(data)
-    //         return data;
-
-    //     }
-    // })
-    // console.log(data)
     const {data} = useVolunteerData()
     return (
-        <div className="my-24">
+        <div className={`my-24 ${isDarkMode ? 'bg-slate-950 text-white' : 'bg-white'}`}>
             <SectionTitle title={"volunteer need"} subTitle={"volunteer"}/>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center">
                 {

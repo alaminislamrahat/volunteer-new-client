@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
 
 const Card = ({ item }) => {
     const {
@@ -13,8 +14,12 @@ const Card = ({ item }) => {
     } = item || {};
     // console.log(item)
 
+    const {setDarkMode,
+        isDarkMode,
+        toggleDarkMode} = useAuth();
+
     return (
-        <div className="card w-96 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
+        <div className={`card w-96 ${isDarkMode ? 'bg-slate-600 text-white' : 'bg-white'}  rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105`}>
             {thumbnail && (
                 <figure className="relative">
                     <img src={thumbnail} alt={postTitle} className="w-full h-48 object-cover rounded-t-xl" />
@@ -22,9 +27,9 @@ const Card = ({ item }) => {
                 </figure>
             )}
             <div className="card-body p-6">
-                <h2 className="text-3xl font-semibold text-gray-900 mb-2 hover:text-indigo-600 transition-colors duration-200">{postTitle}</h2>
-                <p className="text-sm text-gray-600 mb-4">{`Deadline: ${new Date(deadline).toLocaleDateString()}`}</p>
-                <p className="text-sm text-gray-600 mb-4">Need of volunteer : {volunteersNeeded}</p>
+                <h2 className="text-3xl font-semibold  mb-2 hover:text-indigo-600 transition-colors duration-200">{postTitle}</h2>
+                <p className="text-sm mb-4">{`Deadline: ${new Date(deadline).toLocaleDateString()}`}</p>
+                <p className="text-sm  mb-4">Need of volunteer : {volunteersNeeded}</p>
                 <div className="card-actions justify-end mt-4">
                     <Link to={`/volunteerDetail/${_id}`}>
 
