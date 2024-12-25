@@ -9,11 +9,13 @@ import ManageMyPost from "../pages/ManageMyPost/ManageMyPost";
 import Detail from "../pages/Detail/Detail";
 import PrivateRoute from "./PrivateRoute";
 import UpdatePage from "../pages/UPdatePage/UpdatePage";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
       path: "/",
       element: <Root/>,
+      errorElement: <ErrorPage/>,
       children : [
         {
             path : '/',
