@@ -3,6 +3,7 @@ import Caurosel from "../Caurosel/Caurosel";
 import HomeCardContainer from "../HomeCardContainer/HomeCardContainer";
 import useAuth from "../../../Hooks/useAuth";
 import AboutUs from "../AboutUs/AboutUs";
+import FeaturedVolunteerOpportunities from "../FeaturedVolunteerOpportunities/FeaturedVolunteerOpportunities";
 
 
 const Home = () => {
@@ -19,7 +20,9 @@ const Home = () => {
                 </Link>
 
             </div>
+            <FeaturedVolunteerOpportunities/>
             <AboutUs/>
+            
         </div>
     );
 };
