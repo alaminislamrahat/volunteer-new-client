@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Caurosel from "../Caurosel/Caurosel";
 import HomeCardContainer from "../HomeCardContainer/HomeCardContainer";
 import useAuth from "../../../Hooks/useAuth";
+import AboutUs from "../AboutUs/AboutUs";
 
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
                 </Link>
 
             </div>
+            <AboutUs/>
         </div>
     );
 };
