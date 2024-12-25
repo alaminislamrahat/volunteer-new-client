@@ -44,12 +44,12 @@ export const router = createBrowserRouter([
         {
             path : '/volunteerDetail/:id',
             element : <PrivateRoute><Detail/></PrivateRoute>,
-            loader : ({params})=> fetch(`http://localhost:5000/volunteer/${params.id}`)
+            loader : ({params})=> fetch(`https://volunteer-management-server-theta.vercel.app/volunteer/${params.id}`)
         },
         {
             path : '/upade/:id',
             element : <PrivateRoute><UpdatePage/></PrivateRoute>,
-            loader : ({params})=> fetch(`http://localhost:5000/volunteer/${params.id}`)
+            loader : ({params})=> fetch(`https://volunteer-management-server-theta.vercel.app/volunteer/${params.id}`)
         },
       ]
     },

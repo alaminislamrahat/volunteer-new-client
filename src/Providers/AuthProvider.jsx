@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         await signOut(auth);
         // Clear JWT token on logout
-        await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
+        await axios.post('https://volunteer-management-server-theta.vercel.app/logout', {}, { withCredentials: true });
         setUser(null);
         setLoading(false);
     };
@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
 
             if (currentUser) {
                 try {
-                    const { data } = await axios.post('http://localhost:5000/jwt', { email: currentUser.email }, { withCredentials: true });
+                    const { data } = await axios.post('https://volunteer-management-server-theta.vercel.app/jwt', { email: currentUser.email }, { withCredentials: true });
                     console.log(data); // JWT received
                     // Set the user along with the JWT token in your state or store
                     setUser({ ...currentUser, token: data.token }); // Store JWT token
@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
                 }
             } else {
                 // If no user, logout the user on the server side
-                await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
+                await axios.post('https://volunteer-management-server-theta.vercel.app/logout', {}, { withCredentials: true });
                 setUser(null); // Ensure the user state is reset
             }
             setLoading(false); // Set loading to false after process completion
