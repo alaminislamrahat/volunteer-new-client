@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
@@ -7,9 +7,13 @@ import toast from "react-hot-toast";
 const Detail = () => {
     const data = useLoaderData();
     const axiosSecure = useAxiosSecure()
-    const { user } = useAuth(); // Assuming user info is stored in context
-    const navigate = useNavigate();
     
+    const navigate = useNavigate();
+    const {
+        user,
+        setDarkMode,
+        isDarkMode,
+        toggleDarkMode } = useAuth();
 
     const {
         category,
@@ -32,14 +36,14 @@ const Detail = () => {
     const closeModal = () => setIsModalOpen(false);
 
     // toast for 0 volunteersNeeded 
-    const handleToast =()=>{
+    const handleToast = () => {
         toast.error("can't apply for be a volunteer .")
     }
 
     // Handle form submission from the modal
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         // Volunteer data with "requested" status
         const volunteerData = {
             volunteerName: user.displayName,
@@ -55,28 +59,28 @@ const Detail = () => {
             organizerName,
             postTitle,
             thumbnail,
-           
+
         };
         console.log(volunteerData)
 
-      
-      try{
-        const {data} = await axiosSecure.post('/beVolunteer',volunteerData)
-        console.log(data);
-        toast.success('successfully added')
-        navigate('/')
-      }
-      catch(err){
-        console.log(err);
-        toast.error(err.message)
-      }
 
-      
+        try {
+            const { data } = await axiosSecure.post('/beVolunteer', volunteerData)
+            console.log(data);
+            toast.success('successfully added')
+            navigate('/')
+        }
+        catch (err) {
+            console.log(err);
+            toast.error(err.message)
+        }
+
+
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">{postTitle}</h2>
+        <div className={`max-w-4xl mx-auto p-6 ${isDarkMode && 'bg-gray-900 text-white'} bg-white shadow-lg rounded-lg`}>
+            <h2 className="text-4xl font-bold  mb-4">{postTitle}</h2>
             <img
                 src={thumbnail}
                 alt="Thumbnail"
@@ -108,28 +112,28 @@ const Detail = () => {
 
             <div className="mt-6">
                 {/* Button to open the modal */}
-              {
-                volunteersNeeded == 0 ? <button 
-                onClick={handleToast}
-                className="btn btn-primary">Be a Volunteer</button> :   <button
-                
-                onClick={openModal} className="btn btn-primary">
-                   Be a Volunteer
-               </button>
-              }
+                {
+                    volunteersNeeded == 0 ? <button
+                        onClick={handleToast}
+                        className="btn btn-primary">Be a Volunteer</button> : <button
+
+                            onClick={openModal} className="btn btn-primary">
+                        Be a Volunteer
+                    </button>
+                }
             </div>
 
             {/* Modal Component */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+                <div className={`fixed inset-0  bg-gray-500 bg-opacity-50 flex justify-center items-center`}>
                     <div className="modal modal-open">
-                        <div className="modal-box relative">
+                        <div className={`${isDarkMode && 'bg-slate-900 '} modal-box relative `}>
                             <h2 className="text-2xl font-bold mb-4">
                                 Volunteer for: {postTitle}
                             </h2>
 
                             {/* Modal Form */}
-                            <form onSubmit={handleSubmit} className="space-y-4">
+                            <form  onSubmit={handleSubmit} className="space-y-4 text-black">
                                 <input
                                     type="text"
                                     value={thumbnail}
