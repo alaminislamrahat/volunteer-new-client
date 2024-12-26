@@ -39,26 +39,32 @@ const AllVolunteerNeeds = () => {
     return (
         <div className="mb-10">
             <form onSubmit={handleSearch}>
-                <div className='flex items-center gap-6 justify-end p-1 overflow-hidden  rounded-lg mt-3'>
+                <div className='flex flex-col md:flex-row items-center gap-6 justify-end p-1 overflow-hidden  rounded-lg mt-3'>
 
+                    <div className="flex gap-6">
+                        
                     <button
                         onClick={() => setFormate('card')}
                     ><LiaTableSolid size={40} /></button>
                     <button
                         onClick={() => setFormate('table')}
                     ><MdFormatAlignJustify size={30} /></button>
-                    <input
-                        onChange={e => setSearchText(e.target.value)}
-                        className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white  border focus:placeholder-transparent'
-                        type='text'
-                        name='search'
-                        placeholder='Enter Volunteer title'
-                        aria-label='Enter Volunteer title'
-                    />
+                    </div>
 
-                    <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase bg-gradient-to-r from-cyan-500 via-purple-400 to-pink-500 rounded-md hover:bg-gray-600'>
-                        Search
-                    </button>
+                    <div className="flex">
+                        <input
+                            onChange={e => setSearchText(e.target.value)}
+                            className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white  border focus:placeholder-transparent'
+                            type='text'
+                            name='search'
+                            placeholder='Enter Volunteer title'
+                            aria-label='Enter Volunteer title'
+                        />
+
+                        <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase bg-gradient-to-r from-cyan-500 via-purple-400 to-pink-500 rounded-md hover:bg-gray-600'>
+                            Search
+                        </button>
+                    </div>
                 </div>
             </form>
 
