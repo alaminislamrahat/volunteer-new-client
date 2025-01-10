@@ -85,7 +85,7 @@ const Navbar = () => {
                 {/* Dark Mode Switch and Profile Pic */}
                 <div className="flex items-center gap-4">
                     <DarkModeSwitch
-                        style={{ marginBottom: '1rem' }}
+                        style={{  }}
                         checked={isDarkMode}
                         onChange={toggleDarkMode}
                         size={40}
