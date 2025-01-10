@@ -10,9 +10,8 @@ const AddVolunteerPost = () => {
   const axiosSecure = useAxiosSecure();
   
   const {user,
-    setDarkMode,
-    isDarkMode,
-    toggleDarkMode} = useAuth();
+    
+    isDarkMode} = useAuth();
 
   // Step 1: Add a state for the date
   const [deadline, setDeadline] = useState(new Date());
@@ -51,7 +50,7 @@ const AddVolunteerPost = () => {
 
   return (
     <div className={`max-w-4xl mx-auto p-6 ${isDarkMode ? 'bg-gray-800 text-black' : 'bg-white '} rounded-lg shadow-lg`}>
-      <SectionTitle title={"Add Volunteer Need Post"} subTitle={"add data"}/>
+      <h1 className=''>Add Volunteer Need Post</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
 
         {/* Thumbnail */}
@@ -192,7 +191,7 @@ const AddVolunteerPost = () => {
         <div className="form-control mt-4">
           <button
             type="submit"
-            className="btn btn-primary w-full"
+            className="btn bg-[#4E896D] text-white w-full"
           >
             Add Post
           </button>

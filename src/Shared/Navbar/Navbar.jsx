@@ -19,20 +19,20 @@ const Navbar = () => {
                 <li>
                     {/* Profile link with dropdown toggle */}
                     <button onClick={() => setProfileDropdownVisible(!profileDropdownVisible)} className="btn btn-ghost flex items-center gap-2">
-                        <FaUserAlt className="text-pink-600" /> My Profile
+                        <FaUserAlt className="text-[#8dccb5]" /> My Profile
                     </button>
 
                     {/* Dropdown menu for "My Profile" */}
                     {profileDropdownVisible && (
-                        <ul className={`menu menu-compact dropdown-content bg-base-100 rounded-box z-[1] mt-10 w-52 p-2 shadow-lg absolute right-0 ${isDarkMode && 'bg-slate-950 text-white'}`}>
+                        <ul className={`menu menu-compact dropdown-content bg-black bg-opacity-30 rounded-box z-[1] mt-10 w-52 p-2 shadow-lg absolute right-0 `}>
                             <li>
                                 <Link to="/add-volunteer-post" className="flex items-center gap-2">
-                                    <FaPlus className="text-pink-600" /> Add Volunteer Need Post
+                                    <FaPlus className="text-[#8dccb5]" /> Add Volunteer Need Post
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/manage-my-posts" className="flex items-center gap-2">
-                                    <FaClipboardList className="text-pink-600" /> Manage My Posts
+                                    <FaClipboardList className="text-[#8dccb5]" /> Manage My Posts
                                 </Link>
                             </li>
                         </ul>
@@ -48,10 +48,10 @@ const Navbar = () => {
     };
 
     return (
-        <div className={`navbar ${isDarkMode ? 'bg-black text-white' : 'bg-base-100 shadow-lg'} sticky top-0 z-50`}>
+        <div className={`navbar bg-black text-white bg-opacity-40 fixed top-0 z-50 `}>
             {/* Website Name / Logo */}
             <div className="navbar-start flex items-center">
-                <Link to="/" className="btn btn-ghost text-2xl font-semibold text-pink-600">Volunteer</Link>
+                <Link to="/" className="btn btn-ghost text-2xl font-semibold text-[#8dccb5]">Volunteer</Link>
             </div>
 
             {/* Navbar Center for Large Screens */}
@@ -69,7 +69,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu */}
                 {navbarMenuVisible && (
-                    <ul className={`menu  menu-compact dropdown-content bg-base-100 rounded-box z-[1] mt-48 w-52 p-2 shadow-lg absolute right-0 ${isDarkMode && 'bg-slate-950 text-white'}`}>
+                    <ul className={`menu  menu-compact dropdown-content bg-base-100 rounded-box z-[1] mt-48 w-52 p-2 shadow-lg absolute right-0 `}>
                         {navLinks}
                         {!user && (
                             <li>
@@ -102,9 +102,9 @@ const Navbar = () => {
 
                             {/* Avatar Dropdown Menu */}
                             {avatarDropdownVisible && (
-                                <ul className={`menu menu-compact dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow-lg absolute right-0 ${isDarkMode && 'bg-slate-950 text-white'}`}>
+                                <ul className={`menu menu-compact dropdown-content bg-black bg-opacity-40 rounded-box z-[1] mt-3 w-52 p-2 shadow-lg absolute right-0 `}>
                                     <li className="flex items-center gap-2">
-                                        <FaUserAlt className="text-pink-600" />
+                                        <FaUserAlt className="text-[#8dccb5]" />
                                         <span>{user.displayName}</span> {/* Display the user's name */}
                                     </li>
                                     <li>

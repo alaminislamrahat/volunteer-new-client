@@ -68,12 +68,12 @@ const MyVolunteerNeedPost = () => {
     }
     return (
         <div className="p-6">
-            <SectionTitle title={"My Volunteer Need Posts"} subTitle={"My Posted"} />
+            <h1 className="text-center font-bold text-5xl my-28 text-[#E5B561]">My Volunteer Need Post</h1>
 
             <div className={`overflow-x-auto ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white'} shadow-lg rounded-lg`}>
                 <table className="table-auto w-full text-left text-gray-600">
                     {/* Table head */}
-                    <thead className="bg-indigo-500 text-white">
+                    <thead className="bg-[#4E896D] text-white">
                         <tr>
                             <th className="py-3 px-6">#</th>
                             <th className="py-3 px-6">Thumbnail</th>

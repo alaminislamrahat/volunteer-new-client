@@ -5,11 +5,10 @@ import useAuth from "../Hooks/useAuth";
 
 
 const Root = () => {
-    const {setDarkMode,
-        isDarkMode,
-        toggleDarkMode} = useAuth();
+    const {
+        isDarkMode} = useAuth();
     return (
-        <div className={`${isDarkMode ?'bg-slate-950 text-white' : 'bg-white text-black'}`}>
+        <div className={`${isDarkMode ?'bg-[#080d0b] text-white' : 'bg-[#F8F9FA] text-[#000000]'}`}>
             <Navbar/>
             <Outlet/>
             <Footer/>

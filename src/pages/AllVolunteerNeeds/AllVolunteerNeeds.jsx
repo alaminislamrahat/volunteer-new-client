@@ -37,9 +37,9 @@ const AllVolunteerNeeds = () => {
     console.log(search, searchText)
 
     return (
-        <div className="mb-10">
+        <div className="pt-24 container mx-auto ">
             <form onSubmit={handleSearch}>
-                <div className='flex flex-col md:flex-row items-center gap-6 justify-end p-1 overflow-hidden  rounded-lg mt-3'>
+                <div className='flex flex-col md:flex-row items-center gap-6 justify-end p-1 overflow-hidden  rounded-lg '>
 
                     <div className="flex gap-6">
                         
@@ -61,19 +61,19 @@ const AllVolunteerNeeds = () => {
                             aria-label='Enter Volunteer title'
                         />
 
-                        <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase bg-gradient-to-r from-cyan-500 via-purple-400 to-pink-500 rounded-md hover:bg-gray-600'>
+                        <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase bg-[#4E896D] rounded-md hover:bg-gray-600'>
                             Search
                         </button>
                     </div>
                 </div>
             </form>
 
-            <SectionTitle title={"all volunteer"} subTitle={"volunteer"} />
+          <h1 className="text-5xl font-bold text-[#4E896D] text-center mt-10 mb-20"> All Vounteer Need</h1>
 
             {/* card */}
             {
                 foramte == 'card' &&
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-5 justify-center items-center">
                     {
                         allData?.map(item => <Card key={item._id} item={item} />)
                     }

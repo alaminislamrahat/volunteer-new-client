@@ -9,15 +9,14 @@ import useAuth from "../../../Hooks/useAuth";
 
 const HomeCardContainer = () => {
   
-    const {setDarkMode,
-        isDarkMode,
-        toggleDarkMode} = useAuth();
+    const {
+        isDarkMode} = useAuth();
 
     const {data} = useVolunteerData()
     return (
-        <div className={`my-24 ${isDarkMode ? 'bg-slate-950 text-white' : 'bg-white'}`}>
-            <SectionTitle title={"volunteer need"} subTitle={"volunteer"}/>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center">
+        <div className={`my-24 ${isDarkMode ? '' : ''}`}>
+           <h1 className="text-center text-3xl font-bold mb-10">Volunteer Need</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-5 justify-center items-center">
                 {
                     data?.slice(0,6).map(item => <Card key={item._id} item={item} />)
                 }
