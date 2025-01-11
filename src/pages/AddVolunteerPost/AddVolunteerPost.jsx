@@ -50,7 +50,7 @@ const AddVolunteerPost = () => {
 
   return (
     <div className={`max-w-4xl mx-auto p-6 ${isDarkMode ? 'bg-gray-800 text-black' : 'bg-white '} rounded-lg shadow-lg`}>
-      <h1 className=''>Add Volunteer Need Post</h1>
+      <h1 className={`${isDarkMode && 'text-white'} text-center font-bold text-4xl pt-24 pb-10`}>Add Volunteer Need Post</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
 
         {/* Thumbnail */}
