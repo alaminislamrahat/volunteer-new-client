@@ -16,9 +16,9 @@ const Banner = () => {
       {/* Content Section */}
       <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10 px-4">
         <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 50 }} // Start slightly below
+          animate={{ opacity: 1, y: 0 }} // Animate to its original position
+          transition={{ duration: 0.8 }} // Duration of the animation
           className="w-full max-w-3xl"
         >
           <h1 className="text-xl md:text-5xl font-extrabold lg:mt-0 mt-[300px] md:pt-1 mb-8">
@@ -27,9 +27,9 @@ const Banner = () => {
 
           {/* Buttons with animations */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            initial={{ opacity: 0, y: 50 }} // Start slightly below for the buttons
+            animate={{ opacity: 1, y: 0 }} // Animate to its original position
+            transition={{ duration: 0.8, delay: 0.4 }} // Add a slight delay
             className="flex flex-col sm:flex-row gap-5 justify-center items-center lg:pb-0 pb-56"
           >
             <a

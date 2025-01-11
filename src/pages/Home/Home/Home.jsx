@@ -18,7 +18,7 @@ const Home = () => {
         isDarkMode
         } = useAuth();
     return (
-        <div className={`${isDarkMode ? 'bg-slate-950 text-white' : ''}`}>
+        <div className={`${isDarkMode ? 'bg-slate-950 text-white' : ''} overflow-x-hidden`}>
             <Caurosel />
             <Services/>
             <Cover img={"https://i.ibb.co/DWJXtfK/ocg-saving-the-ocean-1j7-atc0z8-unsplash-1.jpg"}/>

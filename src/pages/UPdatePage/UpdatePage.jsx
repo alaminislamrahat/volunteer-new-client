@@ -52,8 +52,8 @@ const UpdatePage = () => {
     };
    
     return (
-        <div className={`max-w-4xl mx-auto p-6 ${isDarkMode ? 'bg-gray-800 text-black' : 'bg-white '} rounded-lg shadow-lg`}>
-            <SectionTitle title={"Update Volunteer Data"} subTitle={"update data"} />
+        <div className={`max-w-4xl mx-auto p-6 pt-28 ${isDarkMode ? 'bg-gray-800 text-black' : 'bg-white '} rounded-lg shadow-lg`}>
+           <h3 className="text-center font-bold text-4xl text-[#4E896D]">Update Data</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
 
                 {/* Thumbnail */}
@@ -200,7 +200,7 @@ const UpdatePage = () => {
                 <div className="form-control mt-4">
                     <button
                         type="submit"
-                        className="btn btn-primary w-full"
+                        className="btn bg-[#4E896D] text-white w-full"
                     >
                         Update Post
                     </button>

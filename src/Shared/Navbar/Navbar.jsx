@@ -69,7 +69,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu */}
                 {navbarMenuVisible && (
-                    <ul className={`menu  menu-compact dropdown-content bg-base-100 rounded-box z-[1] mt-48 w-52 p-2 shadow-lg absolute right-0 `}>
+                    <ul className={`menu   menu-compact dropdown-content bg-black bg-opacity-40 rounded-box z-[1] mt-48 w-52 p-2 shadow-lg absolute right-0 `}>
                         {navLinks}
                         {!user && (
                             <li>

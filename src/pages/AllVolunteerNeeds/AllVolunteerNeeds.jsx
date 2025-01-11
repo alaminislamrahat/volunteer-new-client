@@ -37,7 +37,7 @@ const AllVolunteerNeeds = () => {
     console.log(search, searchText)
 
     return (
-        <div className="pt-24 container mx-auto ">
+        <div className="pt-24 container mx-auto pb-7 overflow-x-hidden">
             <form onSubmit={handleSearch}>
                 <div className='flex flex-col md:flex-row items-center gap-6 justify-end p-1 overflow-hidden  rounded-lg '>
 

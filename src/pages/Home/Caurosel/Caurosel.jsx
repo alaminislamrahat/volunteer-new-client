@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Carousel = () => {
     const slides = [
@@ -68,18 +69,18 @@ const Carousel = () => {
 
                             {/* Buttons */}
                             <div className="flex space-x-4">
-                                <button
+                                <Link to="/all-volunteer-needs"
                                     className="px-6 py-2 rounded-full text-white font-medium"
                                     style={{ backgroundColor: "#8dccb5" }}
                                 >
                                     Be a Volunteer
-                                </button>
-                                <button
+                                </Link>
+                                <Link to="/add-volunteer-post"
                                     className="px-6 py-2 rounded-full text-white font-medium"
                                     style={{ backgroundColor: "#e5b546" }}
                                 >
                                     Add a Volunteer
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
