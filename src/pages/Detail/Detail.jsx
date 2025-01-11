@@ -80,34 +80,34 @@ const Detail = () => {
     };
 
     return (
-        <div className={`max-w-4xl mx-auto p-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white'} shadow-lg rounded-lg`}>
-            <h2 className="text-4xl font-bold  mb-4">{postTitle}</h2>
+        <div className={`max-w-4xl mx-auto p-6 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white'} shadow-lg rounded-lg mb-24`}>
+            <h2 className="text-4xl text-[#4E896D] pt-24 pb-4 font-bold  mb-4">{postTitle}</h2>
             <img
                 src={thumbnail}
                 alt="Thumbnail"
                 className="w-full h-64 object-cover rounded-md mb-6"
             />
             <div className="space-y-4">
-                <p>
-                    <strong>Category:</strong> {category}
+                <p className="flex md:gap-4">
+                    <strong className="text-[#4E896D] ">Category:</strong> {category}
                 </p>
-                <p>
-                    <strong>Description:</strong> {description}
+                <p className="flex md:gap-4">
+                    <strong className="text-[#4E896D] ">Description:</strong> {description}
                 </p>
-                <p>
-                    <strong>Location:</strong> {location}
+                <p className="flex md:gap-4">
+                    <strong className="text-[#4E896D] ">Location:</strong> {location}
                 </p>
-                <p>
-                    <strong>Volunteers Needed:</strong> {volunteersNeeded}
+                <p className="flex md:gap-4">
+                    <strong className="text-[#4E896D] ">Volunteers Needed:</strong> {volunteersNeeded}
                 </p>
-                <p>
-                    <strong>Deadline:</strong> {deadline}
+                <p className="flex md:gap-4">
+                    <strong className="text-[#4E896D] ">Deadline:</strong> {deadline}
                 </p>
-                <p>
-                    <strong>Organizer Name:</strong> {organizerName}
+                <p className="flex md:gap-4">
+                    <strong className="text-[#4E896D] ">Organizer Name:</strong> {organizerName}
                 </p>
-                <p>
-                    <strong>Organizer Email:</strong> {organizerEmail}
+                <p className="flex md:gap-4">
+                    <strong className="text-[#4E896D] ">Organizer Email:</strong> {organizerEmail}
                 </p>
             </div>
 
@@ -116,9 +116,9 @@ const Detail = () => {
                 {
                     volunteersNeeded == 0 ? <button
                         onClick={handleToast}
-                        className="btn btn-primary">Be a Volunteer</button> : <button
+                        className="btn bg-[#4E896D] text-white">Be a Volunteer</button> : <button
 
-                            onClick={openModal} className="btn btn-primary">
+                            onClick={openModal} className="btn bg-[#4E896D] text-white">
                         Be a Volunteer
                     </button>
                 }
@@ -196,7 +196,7 @@ const Detail = () => {
                                     className="textarea textarea-bordered w-full"
                                 />
 
-                                <button type="submit" className="btn btn-primary w-full">
+                                <button type="submit" className="btn text-white bg-[#4E896D] w-full">
                                     Request
                                 </button>
                             </form>
